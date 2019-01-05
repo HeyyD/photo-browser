@@ -10,6 +10,10 @@ export class PhotoService {
 
   constructor(private http: HttpClient) { }
 
+  getPhoto(id: number): Observable<Photo> {
+    return this.http.get<Photo>(`https://jsonplaceholder.typicode.com/photos/${id}`);
+  }
+
   getPhotos(): Observable<Photo[]> {
     return this.http.get<Photo[]>('https://jsonplaceholder.typicode.com/photos');
   }
