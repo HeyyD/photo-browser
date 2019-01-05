@@ -1,0 +1,10 @@
+:host {
+  display: block;
+
+  .photo-list {
+    width: 750px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
