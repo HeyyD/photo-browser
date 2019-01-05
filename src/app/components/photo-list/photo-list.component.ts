@@ -10,10 +10,11 @@ import { Photo } from 'src/app/interfaces/photo';
 export class PhotoListComponent implements OnInit {
 
   photos: Photo[];
+  photoLoadIndex = 90;
 
   constructor(private photoService: PhotoService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.photoService.getPhotos().subscribe(res => {
       this.photos = res;
     });
