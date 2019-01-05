@@ -11,6 +11,7 @@ export class PhotoListComponent implements OnInit {
   constructor(private photoService: PhotoService) { }
 
   ngOnInit() {
+    this.photoService.getPhotos().subscribe(res => console.log(res));
   }
 
 }
