@@ -1,3 +1,4 @@
-<p>
-  photo-page works!
-</p>
+<div *ngIf="photo">
+  <h3>{{photo.title}}</h3>
+  <img src="{{photo.url}}">
+</div>
