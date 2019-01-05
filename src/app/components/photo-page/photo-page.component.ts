@@ -3,6 +3,9 @@ import { PhotoService } from 'src/app/services/photo-service/photo.service';
 import { ActivatedRoute } from '@angular/router';
 import { Photo } from 'src/app/interfaces/photo';
 import { AlbumService } from 'src/app/services/album-service/album.service';
+import { Album } from 'src/app/interfaces/album';
+import { UserService } from 'src/app/services/user-service/user.service';
+import { User } from 'src/app/interfaces/user';
 
 @Component({
   selector: 'app-photo-page',
@@ -12,11 +15,14 @@ import { AlbumService } from 'src/app/services/album-service/album.service';
 export class PhotoPageComponent implements OnInit {
 
   photo: Photo;
+  album: Album;
+  user: User;
 
   constructor(
     private route: ActivatedRoute,
     private photoService: PhotoService,
-    private albumService: AlbumService
+    private albumService: AlbumService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +34,15 @@ export class PhotoPageComponent implements OnInit {
   }
 
   private initAlbum(): void {
-    this.albumService.getAlbum(this.photo.albumId).subscribe(res => console.log(res));
+    this.albumService.getAlbum(this.photo.albumId).subscribe(res => {
+      this.album = res;
+      this.initUser();
+    });
+  }
+
+  private initUser(): void {
+    this.userService.getUser(this.album.userId).subscribe(res => {
+      this.user = res;
+    });
   }
 }
