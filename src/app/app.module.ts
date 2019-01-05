@@ -7,16 +7,19 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppComponent } from './app.component';
 import { PhotoListComponent } from './components/photo-list/photo-list.component';
+import { PhotoPageComponent } from './components/photo-page/photo-page.component';
 
 const appRoutes: Routes = [
   { path: 'photos', component: PhotoListComponent },
+  { path: 'photo/:id', component: PhotoPageComponent},
   { path: '**', redirectTo: '/photos', pathMatch: 'full' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    PhotoListComponent
+    PhotoListComponent,
+    PhotoPageComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
