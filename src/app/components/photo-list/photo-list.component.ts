@@ -10,7 +10,9 @@ import { Photo } from 'src/app/interfaces/photo';
 export class PhotoListComponent implements OnInit {
 
   photos: Photo[];
+
   photoLoadIndex = 90;
+  photoLoadStep = 30;
 
   constructor(private photoService: PhotoService) { }
 
@@ -20,4 +22,7 @@ export class PhotoListComponent implements OnInit {
     });
   }
 
+  onScroll(): void {
+    this.photoLoadIndex += this.photoLoadStep;
+  }
 }
