@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PhotoService } from 'src/app/services/photo-service/photo.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-photo-page',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PhotoPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private photoService: PhotoService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.photoService.getPhoto(id).subscribe(res => console.log(res));
   }
-
 }
