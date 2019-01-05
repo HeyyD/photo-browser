@@ -33,6 +33,10 @@ export class PhotoPageComponent implements OnInit {
     });
   }
 
+  isReady(): boolean {
+    return !!(this.photo && this.album && this.user);
+  }
+
   private initAlbum(): void {
     this.albumService.getAlbum(this.photo.albumId).subscribe(res => {
       this.album = res;
