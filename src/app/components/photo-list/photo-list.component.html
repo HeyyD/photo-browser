@@ -1,3 +1,6 @@
-<div infiniteScroll [infiniteScrollDistance]="1" (scrolled)="onScroll()" class="photo-list" *ngIf="photos">
-  <img *ngFor="let photo of photos | slice:0:photoLoadIndex" class="photo-list-item" src="{{photo.thumbnailUrl}}">
+<div *ngIf="photos" infiniteScroll [infiniteScrollDistance]="1" (scrolled)="onScroll()" class="photo-list">
+  <a *ngFor="let photo of photos | slice:0:photoLoadIndex" routerLink="/photo/{{photo.id}}" class="photo-list-item" >
+    <div class="photo-list-item-overlay"></div>
+    <img src="{{photo.thumbnailUrl}}">
+  </a>
 </div>
