@@ -40,6 +40,7 @@ export class PhotoPageComponent implements OnInit {
   private initAlbum(): void {
     this.albumService.getAlbum(this.photo.albumId).subscribe(res => {
       this.album = res;
+      console.log('album', this.album);
       this.initUser();
     });
   }
@@ -47,6 +48,7 @@ export class PhotoPageComponent implements OnInit {
   private initUser(): void {
     this.userService.getUser(this.album.userId).subscribe(res => {
       this.user = res;
+      console.log('user', this.user);
     });
   }
 }
