@@ -1,0 +1,15 @@
+<ng-container *ngIf="isReady()">
+<h3>{{photo.title}}</h3>
+<div class="photo-page-container">
+  <div>
+    <h5>by <span><a href="#">{{user.username}}</a></span></h5>
+    <img src="{{photo.url}}">
+  </div>
+  <div class="album-container">
+    <h5>from album <span><a href="#">{{album.title}}</a></span></h5>
+    <div class="album-container-list">
+      <app-photo-link *ngFor="let photo of albumPhotos" [photo]="photo"></app-photo-link>
+    </div>
+  </div>
+</div>
+</ng-container>

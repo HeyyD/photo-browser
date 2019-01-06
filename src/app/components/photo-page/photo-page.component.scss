@@ -1,0 +1,29 @@
+:host {
+  display: block;
+
+  .photo-page-container {
+    display: flex;
+
+    .album-container {
+      margin: 0 auto; 
+
+      &-list {
+        $tile-amount: 4;
+        $margin-width: $tile-amount * 6;
+    
+        display: flex;
+        flex-wrap: wrap;
+        width: 150px * $tile-amount + $margin-width;
+        height: 600px;
+        overflow-y: auto;
+
+        -ms-overflow-style: none;  // IE 10+
+        overflow: -moz-scrollbars-none;  // Firefox
+
+        &::-webkit-scrollbar {
+          display: none; // Chrone and Safari
+        }
+      }
+    }
+  }
+}
