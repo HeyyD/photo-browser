@@ -2,4 +2,8 @@
   <h3>{{photo.title}}</h3>
   <h5>by <span><a href="#">{{user.username}}</a></span></h5>
   <img src="{{photo.url}}">
+  <h5>from album {{album.title}}</h5>
+  <div class="album-container">
+    <app-photo-link *ngFor="let photo of albumPhotos" [photo]="photo"></app-photo-link>
+  </div>
 </div>

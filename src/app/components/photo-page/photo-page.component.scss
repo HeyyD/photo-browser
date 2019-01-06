@@ -1,0 +1,10 @@
+:host {
+  .album-container {
+    $tile-amount: 4;
+    $margin-width: $tile-amount * 6;
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 150px * $tile-amount + $margin-width;
+  }
+}

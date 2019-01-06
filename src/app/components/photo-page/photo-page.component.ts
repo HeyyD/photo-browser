@@ -17,6 +17,7 @@ export class PhotoPageComponent implements OnInit {
   photo: Photo;
   album: Album;
   user: User;
+  albumPhotos: Photo[];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,18 +30,18 @@ export class PhotoPageComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.photoService.getPhoto(id).subscribe(res => {
       this.photo = res;
+      this.initAlbumPhotos();
       this.initAlbum();
     });
   }
 
   isReady(): boolean {
-    return !!(this.photo && this.album && this.user);
+    return !!(this.photo && this.album && this.user && this.albumPhotos);
   }
 
   private initAlbum(): void {
     this.albumService.getAlbum(this.photo.albumId).subscribe(res => {
       this.album = res;
-      console.log('album', this.album);
       this.initUser();
     });
   }
@@ -48,7 +49,12 @@ export class PhotoPageComponent implements OnInit {
   private initUser(): void {
     this.userService.getUser(this.album.userId).subscribe(res => {
       this.user = res;
-      console.log('user', this.user);
+    });
+  }
+
+  private initAlbumPhotos(): void {
+    this.photoService.getAlbumPhotos(this.photo.albumId).subscribe(res => {
+      this.albumPhotos = res;
     });
   }
 }
