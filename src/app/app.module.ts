@@ -8,6 +8,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AppComponent } from './app.component';
 import { PhotoListComponent } from './components/photo-list/photo-list.component';
 import { PhotoPageComponent } from './components/photo-page/photo-page.component';
+import { PhotoLinComponent } from './components/photo-lin/photo-lin.component';
+import { PhotoLinkComponent } from './components/photo-link/photo-link.component';
 
 const appRoutes: Routes = [
   { path: 'photos', component: PhotoListComponent },
@@ -19,7 +21,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     PhotoListComponent,
-    PhotoPageComponent
+    PhotoPageComponent,
+    PhotoLinComponent,
+    PhotoLinkComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
