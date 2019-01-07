@@ -1,4 +1,8 @@
-<div *ngIf="photos" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="100" (scrolled)="onScroll()" class="photo-list">
+<div *ngIf="photos; else loading" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="100" (scrolled)="onScroll()" class="photo-list">
   <app-photo-link *ngFor="let photo of photos | slice:0:photoLoadIndex" [photo]="photo"></app-photo-link>
 </div>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>
  
