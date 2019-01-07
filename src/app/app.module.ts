@@ -10,6 +10,7 @@ import { PhotoListComponent } from './components/photo-list/photo-list.component
 import { PhotoPageComponent } from './components/photo-page/photo-page.component';
 import { PhotoLinkComponent } from './components/photo-link/photo-link.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 const appRoutes: Routes = [
   { path: 'photos', component: PhotoListComponent },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     PhotoListComponent,
     PhotoPageComponent,
     PhotoLinkComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    SpinnerComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

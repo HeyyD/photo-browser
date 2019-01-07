@@ -31,7 +31,7 @@ export class PhotoPageComponent implements OnDestroy {
   ) {
     const sub = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.init();
+        this.reset();
       }
     });
 
@@ -80,5 +80,13 @@ export class PhotoPageComponent implements OnDestroy {
     });
 
     this.subscriptios.push(sub);
+  }
+
+  private reset(): void {
+    this.photo = undefined;
+    this.user = undefined;
+    this.album = undefined;
+    this.albumPhotos = undefined;
+    this.init();
   }
 }
