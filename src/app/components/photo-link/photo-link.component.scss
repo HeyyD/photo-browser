@@ -1,0 +1,37 @@
+:host {
+  display: block;
+
+  .photo-link {
+    display: block;
+    position: relative;
+    margin: 0 3px 6px;
+    animation: .3s ease-in-out both fade-in;
+
+    &-overlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+  
+      &:hover {
+        background: #000;
+        opacity: 0.7;
+      }
+    }
+  
+    img {
+      vertical-align: top;
+    }
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

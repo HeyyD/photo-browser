@@ -1,0 +1,4 @@
+<div *ngIf="photos" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="100" (scrolled)="onScroll()" class="photo-list">
+  <app-photo-link *ngFor="let photo of photos | slice:0:photoLoadIndex" [photo]="photo"></app-photo-link>
+</div>
+ 
