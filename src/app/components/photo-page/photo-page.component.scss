@@ -1,11 +1,22 @@
 :host {
   display: block;
 
+  .photo-title {
+    text-align: center;
+  }
+
   .photo-page-container {
     display: flex;
 
+    .photo-wrapper {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: flex-end;
+    }
+
     .album-container {
       margin: 0 auto; 
+      flex: 1 0 auto;
 
       &-list {
         $tile-amount: 4;
@@ -25,5 +36,9 @@
         }
       }
     }
+  }
+
+  .padding {
+    padding: 0 10px;
   }
 }
