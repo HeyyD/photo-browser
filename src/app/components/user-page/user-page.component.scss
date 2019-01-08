@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+
+  .description-container {
+    max-width: 75ch;
+  }
+
+  .album-container {
+    display: block;
+    margin: auto;
+    padding: 0 20px;
+  }
+}
