@@ -14,9 +14,10 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 
 const appRoutes: Routes = [
-  { path: 'photos', component: PhotoListComponent },
+  { path: 'home', component: PhotoListComponent },
   { path: 'photo/:id', component: PhotoPageComponent},
-  { path: '**', redirectTo: '/photos', pathMatch: 'full' }
+  { path: 'user/:id', component: UserPageComponent },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({

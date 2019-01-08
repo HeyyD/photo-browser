@@ -3,7 +3,7 @@
 <div class="photo-page-container">
   <div class="photo-wrapper padding">
     <div class="photo-container">
-      <h5>by <span><a href="#">{{user.username}}</a></span></h5>
+      <h5>by <span><a routerLink="/user/{{user.id}}">{{user.username}}</a></span></h5>
       <img src="{{photo.url}}">
     </div>
   </div>
