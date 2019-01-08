@@ -1,7 +1,7 @@
 <ng-container *ngIf="isReady(); else loading">
-  <p>
-    {{user.username}}
-  </p>
+  <h1>{{user.username}}</h1>
+  <h4>{{user.username}}<span *ngIf="user.username.toLowerCase().charAt(user.username.length - 1) === 's'">'</span>s albums</h4>
+  <app-album *ngFor="let album of albums"></app-album>
 </ng-container>
 
 <ng-template #loading>

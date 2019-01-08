@@ -12,6 +12,7 @@ import { PhotoLinkComponent } from './components/photo-link/photo-link.component
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { AlbumComponent } from './components/album/album.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: PhotoListComponent },
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     PhotoLinkComponent,
     ToolbarComponent,
     SpinnerComponent,
-    UserPageComponent
+    UserPageComponent,
+    AlbumComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
