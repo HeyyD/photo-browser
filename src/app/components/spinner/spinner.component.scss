@@ -1,7 +1,12 @@
-.spinner-container {
-  display: flex;
-  i {
-    font-size: 2.5em;
-    margin: auto;
+:host {
+  display: block;
+  margin: 0 auto;
+
+  .spinner-container {
+    display: flex;
+    i {
+      font-size: 2.5em;
+      margin: auto;
+    }
   }
 }
