@@ -13,9 +13,11 @@
       libero et, dapibus ultricies dolor.
     </p>
   </div>
-  <div class="album-container">
+  <div class="album-list-wrapper">
     <h4>{{user.username}}<span *ngIf="user.username.toLowerCase().charAt(user.username.length - 1) === 's'">'</span>s albums</h4>
-    <app-album *ngFor="let album of albums" [album]="album"></app-album>
+    <div class="album-container">
+      <app-album *ngFor="let album of albums" [album]="album"></app-album>
+    </div>
   </div>
 </ng-container>
 
