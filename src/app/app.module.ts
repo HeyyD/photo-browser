@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   { path: 'home', component: PhotoListComponent },
   { path: 'photo/:id', component: PhotoPageComponent},
   { path: 'user/:id', component: UserPageComponent },
-  { path: '**', redirectTo: '/home', pathMatch: 'full' }
+  { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
     AlbumComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
     BrowserModule,
     HttpClientModule,
     InfiniteScrollModule
