@@ -13,11 +13,13 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { AlbumComponent } from './components/album/album.component';
+import { AlbumPageComponent } from './components/album-page/album-page.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: PhotoListComponent },
   { path: 'photo/:id', component: PhotoPageComponent},
   { path: 'user/:id', component: UserPageComponent },
+  { path: 'album/:id', component: AlbumPageComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     ToolbarComponent,
     SpinnerComponent,
     UserPageComponent,
-    AlbumComponent
+    AlbumComponent,
+    AlbumPageComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes, {useHash: true}),

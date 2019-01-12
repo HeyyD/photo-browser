@@ -1,4 +1,4 @@
-<a href="#"><h5>{{album.title}}</h5></a>
+<a routerLink="/album/{{album.id}}"><h5>{{album.title}}</h5></a>
 <div *ngIf="photos; else loading" class="album-container">
   <app-photo-link *ngFor="let photo of photos" [photo]="photo"></app-photo-link>
 </div>
