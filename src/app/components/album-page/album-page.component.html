@@ -1,3 +1,8 @@
-<p>
-  album-page works!
-</p>
+<ng-container *ngIf="isReady(); else loading">
+  <h1>{{album.title}}</h1>
+  <h5>by <span><a routerLink="/user/{{user.id}}">{{user.username}}</a></span></h5>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>

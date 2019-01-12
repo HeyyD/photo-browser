@@ -42,6 +42,10 @@ export class AlbumPageComponent implements OnInit, OnDestroy {
     this.subscribtions.forEach(sub => sub.unsubscribe());
   }
 
+  isReady(): boolean {
+    return !!(this.album && this.user && this.photos);
+  }
+
   private initUser(): void {
     const sub = this.userService.getUser(this.album.userId).subscribe(res => {
       this.user = res;
