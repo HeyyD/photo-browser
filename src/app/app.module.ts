@@ -11,11 +11,14 @@ import { PhotoPageComponent } from './components/photo-page/photo-page.component
 import { PhotoLinkComponent } from './components/photo-link/photo-link.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { AlbumComponent } from './components/album/album.component';
 
 const appRoutes: Routes = [
-  { path: 'photos', component: PhotoListComponent },
+  { path: 'home', component: PhotoListComponent },
   { path: 'photo/:id', component: PhotoPageComponent},
-  { path: '**', redirectTo: '/photos', pathMatch: 'full' }
+  { path: 'user/:id', component: UserPageComponent },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -25,7 +28,9 @@ const appRoutes: Routes = [
     PhotoPageComponent,
     PhotoLinkComponent,
     ToolbarComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UserPageComponent,
+    AlbumComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

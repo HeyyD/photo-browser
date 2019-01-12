@@ -1,0 +1,26 @@
+<ng-container *ngIf="isReady(); else loading">
+  <div class="description-container">
+    <h1>{{user.username}}</h1>
+    <h5>about {{user.username}}</h5>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in nisi vestibulum, 
+      vehicula turpis ornare, fermentum velit. In eleifend, ex sit amet egestas varius, erat 
+      sem consequat leo, et fermentum magna lorem malesuada nulla. Donec tempor mollis 
+      efficitur. Proin et aliquam turpis, pulvinar placerat enim. Phasellus fringilla dui 
+      vel diam molestie suscipit. Aliquam congue sem ligula, at eleifend mauris lacinia in. 
+      Donec in magna eleifend, ultricies sapien et, blandit est. Sed lacinia libero in leo posuere 
+      efficitur vel in sapien. In hac habitasse platea dictumst. Suspendisse neque turpis, luctus et 
+      libero et, dapibus ultricies dolor.
+    </p>
+  </div>
+  <div class="album-list-wrapper">
+    <h4>{{user.username}}<span *ngIf="user.username.toLowerCase().charAt(user.username.length - 1) === 's'">'</span>s albums</h4>
+    <div class="album-container">
+      <app-album *ngFor="let album of albums" [album]="album"></app-album>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>

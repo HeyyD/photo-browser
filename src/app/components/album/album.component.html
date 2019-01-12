@@ -1,0 +1,8 @@
+<a href="#"><h5>{{album.title}}</h5></a>
+<div *ngIf="photos; else loading" class="album-container">
+  <app-photo-link *ngFor="let photo of photos" [photo]="photo"></app-photo-link>
+</div>
+
+<ng-template #loading>
+  <app-spinner></app-spinner>
+</ng-template>
