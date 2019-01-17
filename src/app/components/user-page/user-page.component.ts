@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { AlbumService } from 'src/app/services/album-service/album.service';
@@ -11,20 +11,29 @@ import Page from 'src/app/classes/Page';
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent extends Page implements OnInit {
+export class UserPageComponent extends Page {
 
   user: User;
   albums: Album[];
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService,
     private albumService: AlbumService
   ) {
     super();
+
+    this.addSubscription(
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.init();
+        }
+      })
+    );
   }
 
-  ngOnInit() {
+  init(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.addSubscriptions([
         this.userService.getUser(id).subscribe(res => this.user = res),
