@@ -7,13 +7,14 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/interfaces/user';
 import { Photo } from 'src/app/interfaces/photo';
 import { PhotoService } from 'src/app/services/photo-service/photo.service';
+import Page from 'src/app/classes/Page';
 
 @Component({
   selector: 'app-album-page',
   templateUrl: './album-page.component.html',
   styleUrls: ['./album-page.component.scss']
 })
-export class AlbumPageComponent implements OnInit, OnDestroy {
+export class AlbumPageComponent extends Page implements OnInit {
 
   album: Album;
   user: User;
@@ -26,20 +27,19 @@ export class AlbumPageComponent implements OnInit, OnDestroy {
     private albumService: AlbumService,
     private userService: UserService,
     private photoService: PhotoService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    const sub = this.albumService.getAlbum(id).subscribe(res => {
-      this.album = res;
-      this.initUser();
-      this.initPhotos();
-    });
-    this.subscribtions.push(sub);
-  }
-
-  ngOnDestroy(): void {
-    this.subscribtions.forEach(sub => sub.unsubscribe());
+    this.addSubscription(
+      this.albumService.getAlbum(id).subscribe(res => {
+        this.album = res;
+        this.initUser();
+        this.initPhotos();
+      })
+    );
   }
 
   isReady(): boolean {
@@ -47,17 +47,19 @@ export class AlbumPageComponent implements OnInit, OnDestroy {
   }
 
   private initUser(): void {
-    const sub = this.userService.getUser(this.album.userId).subscribe(res => {
-      this.user = res;
-    });
-    this.subscribtions.push(sub);
+    this.addSubscription(
+      this.userService.getUser(this.album.userId).subscribe(res => {
+        this.user = res;
+      })
+    );
   }
 
   private initPhotos(): void {
-    const sub = this.photoService.getAlbumPhotos(this.album.id).subscribe(res => {
-      this.photos = res;
-    });
-    this.subscribtions.push(sub);
+    this.addSubscription(
+      this.photoService.getAlbumPhotos(this.album.id).subscribe(res => {
+        this.photos = res;
+      })
+    );
   }
 
 }
