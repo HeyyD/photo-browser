@@ -1,4 +1,7 @@
+$top-padding: 142px;
+
 .page-container {
   padding: 0 40px;
-  margin-top: 142px;
+  height: calc(100% - 142px);
+  padding-top: $top-padding;
 }

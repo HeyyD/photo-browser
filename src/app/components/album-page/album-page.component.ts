@@ -1,32 +1,31 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PhotoService } from 'src/app/services/photo-service/photo.service';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Photo } from 'src/app/interfaces/photo';
 import { AlbumService } from 'src/app/services/album-service/album.service';
 import { Album } from 'src/app/interfaces/album';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/interfaces/user';
-import { Subscription } from 'rxjs';
+import { Photo } from 'src/app/interfaces/photo';
+import { PhotoService } from 'src/app/services/photo-service/photo.service';
 import Page from 'src/app/classes/Page';
 
 @Component({
-  selector: 'app-photo-page',
-  templateUrl: './photo-page.component.html',
-  styleUrls: ['./photo-page.component.scss']
+  selector: 'app-album-page',
+  templateUrl: './album-page.component.html',
+  styleUrls: ['./album-page.component.scss']
 })
-export class PhotoPageComponent extends Page {
+export class AlbumPageComponent extends Page {
 
-  photo: Photo;
   album: Album;
   user: User;
-  albumPhotos: Photo[];
+  photos: Photo[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private photoService: PhotoService,
     private albumService: AlbumService,
-    private userService: UserService
+    private userService: UserService,
+    private photoService: PhotoService
   ) {
     super();
 
@@ -39,29 +38,19 @@ export class PhotoPageComponent extends Page {
     );
   }
 
-  isReady(): boolean {
-    return !!(this.photo && this.album && this.user && this.albumPhotos);
-  }
-
-  private init() {
+  init(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-
     this.addSubscription(
-      this.photoService.getPhoto(id).subscribe(res => {
-        this.photo = res;
-        this.initAlbumPhotos();
-        this.initAlbum();
-      })
-    );
-  }
-
-  private initAlbum(): void {
-    this.addSubscription(
-      this.albumService.getAlbum(this.photo.albumId).subscribe(res => {
+      this.albumService.getAlbum(id).subscribe(res => {
         this.album = res;
         this.initUser();
+        this.initPhotos();
       })
     );
+  }
+
+  isReady(): boolean {
+    return !!(this.album && this.user && this.photos);
   }
 
   private initUser(): void {
@@ -72,19 +61,19 @@ export class PhotoPageComponent extends Page {
     );
   }
 
-  private initAlbumPhotos(): void {
+  private initPhotos(): void {
     this.addSubscription(
-      this.photoService.getAlbumPhotos(this.photo.albumId).subscribe(res => {
-        this.albumPhotos = res;
+      this.photoService.getAlbumPhotos(this.album.id).subscribe(res => {
+        this.photos = res;
       })
     );
   }
 
   private reset(): void {
-    this.photo = undefined;
-    this.user = undefined;
     this.album = undefined;
-    this.albumPhotos = undefined;
+    this.photos = undefined;
+    this.user = undefined;
     this.init();
   }
+
 }
