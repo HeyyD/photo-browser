@@ -7,20 +7,19 @@ import { Album } from 'src/app/interfaces/album';
 import { UserService } from 'src/app/services/user-service/user.service';
 import { User } from 'src/app/interfaces/user';
 import { Subscription } from 'rxjs';
+import Page from 'src/app/classes/Page';
 
 @Component({
   selector: 'app-photo-page',
   templateUrl: './photo-page.component.html',
   styleUrls: ['./photo-page.component.scss']
 })
-export class PhotoPageComponent implements OnDestroy {
+export class PhotoPageComponent extends Page {
 
   photo: Photo;
   album: Album;
   user: User;
   albumPhotos: Photo[];
-
-  subscriptios: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,17 +28,15 @@ export class PhotoPageComponent implements OnDestroy {
     private albumService: AlbumService,
     private userService: UserService
   ) {
-    const sub = this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.reset();
-      }
-    });
+    super();
 
-    this.subscriptios.push(sub);
-  }
-
-  ngOnDestroy() {
-    this.subscriptios.forEach(subscription => subscription.unsubscribe());
+    this.addSubscription(
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.reset();
+        }
+      })
+    );
   }
 
   isReady(): boolean {
@@ -48,38 +45,39 @@ export class PhotoPageComponent implements OnDestroy {
 
   private init() {
     const id = +this.route.snapshot.paramMap.get('id');
-    const sub = this.photoService.getPhoto(id).subscribe(res => {
-      this.photo = res;
-      this.initAlbumPhotos();
-      this.initAlbum();
-    });
 
-    this.subscriptios.push(sub);
+    this.addSubscription(
+      this.photoService.getPhoto(id).subscribe(res => {
+        this.photo = res;
+        this.initAlbumPhotos();
+        this.initAlbum();
+      })
+    );
   }
 
   private initAlbum(): void {
-    const sub = this.albumService.getAlbum(this.photo.albumId).subscribe(res => {
-      this.album = res;
-      this.initUser();
-    });
-
-    this.subscriptios.push(sub);
+    this.addSubscription(
+      this.albumService.getAlbum(this.photo.albumId).subscribe(res => {
+        this.album = res;
+        this.initUser();
+      })
+    );
   }
 
   private initUser(): void {
-    const sub = this.userService.getUser(this.album.userId).subscribe(res => {
-      this.user = res;
-    });
-
-    this.subscriptios.push(sub);
+    this.addSubscription(
+      this.userService.getUser(this.album.userId).subscribe(res => {
+        this.user = res;
+      })
+    );
   }
 
   private initAlbumPhotos(): void {
-    const sub = this.photoService.getAlbumPhotos(this.photo.albumId).subscribe(res => {
-      this.albumPhotos = res;
-    });
-
-    this.subscriptios.push(sub);
+    this.addSubscription(
+      this.photoService.getAlbumPhotos(this.photo.albumId).subscribe(res => {
+        this.albumPhotos = res;
+      })
+    );
   }
 
   private reset(): void {
