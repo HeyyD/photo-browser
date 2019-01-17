@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { OnDestroy } from '@angular/core';
 
-abstract class Page implements OnDestroy {
+export default abstract class Page implements OnDestroy {
   private subscriptions: Subscription[] = [];
 
   protected addSubscription(subscription: Subscription) {
