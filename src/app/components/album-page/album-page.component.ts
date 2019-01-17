@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AlbumService } from 'src/app/services/album-service/album.service';
 import { Album } from 'src/app/interfaces/album';
 import { Subscription } from 'rxjs';
@@ -14,24 +14,31 @@ import Page from 'src/app/classes/Page';
   templateUrl: './album-page.component.html',
   styleUrls: ['./album-page.component.scss']
 })
-export class AlbumPageComponent extends Page implements OnInit {
+export class AlbumPageComponent extends Page {
 
   album: Album;
   user: User;
   photos: Photo[];
 
-  private subscribtions: Subscription[] = [];
-
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private albumService: AlbumService,
     private userService: UserService,
     private photoService: PhotoService
   ) {
     super();
+
+    this.addSubscription(
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.reset();
+        }
+      })
+    );
   }
 
-  ngOnInit(): void {
+  init(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.addSubscription(
       this.albumService.getAlbum(id).subscribe(res => {
@@ -60,6 +67,13 @@ export class AlbumPageComponent extends Page implements OnInit {
         this.photos = res;
       })
     );
+  }
+
+  private reset(): void {
+    this.album = undefined;
+    this.photos = undefined;
+    this.user = undefined;
+    this.init();
   }
 
 }
